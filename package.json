@@ -1,0 +1,11 @@
+{
+  "name": "using-dispose-example",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "author": "Andrew Burgess",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

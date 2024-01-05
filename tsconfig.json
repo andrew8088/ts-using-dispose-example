@@ -1,0 +1,30 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowJs": false,
+    "outDir": "lib",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": ["es2020", "dom"],
+    "noErrorTruncation": true,
+    "incremental": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "swc": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
