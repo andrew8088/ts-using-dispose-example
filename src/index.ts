@@ -1,16 +1,12 @@
 type Fn<A extends unknown[] = unknown[], R = unknown> = (...args: A) => R;
 
-export function mock<T>(obj: T, key: keyof T, mock: unknown) {
+export function mock<T>(obj: T, key: keyof T, mock: Fn) {
   const origFn = obj[key];
-  if (typeof origFn !== "function") {
-    throw new Error("can only mock function");
-  }
-
   let count = 0;
 
   (obj[key] as unknown) = (...args: unknown[]) => {
     count++;
-    return (mock as Fn)(...args);
+    return mock(...args);
   };
 
   return {
