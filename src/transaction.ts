@@ -15,7 +15,7 @@ class Transaction {
     this.#tasks.push(callback);
   }
 
-  async [Symbol.asyncDispose]() {
+  async done() {
     if (!this.#failed) {
       for (const fn of this.#tasks) {
         await fn();
@@ -25,7 +25,7 @@ class Transaction {
 }
 
 (async () => {
-  await using t = new Transaction();
+  const t = new Transaction();
   t.enqueue(async () => console.log('send success email'));
 
   t.run(async () => {
@@ -35,4 +35,6 @@ class Transaction {
     }
     throw 'work failed'
   });
+
+  t.done();
 })();

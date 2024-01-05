@@ -13,7 +13,7 @@ export function mock<T>(obj: T, key: keyof T, mock: Fn) {
     get count() {
       return count;
     },
-    [Symbol.dispose]() {
+    reset() {
       console.log("disposing");
       obj[key] = origFn;
     },
@@ -35,11 +35,12 @@ const MyModule = {
 };
 
 {
-  using m = mock(MyModule, "sum", () => 10);
+  const m = mock(MyModule, "sum", () => 10);
 
   const x = MyModule.product(3, 4);
   console.log(x);
   console.log("call count", m.count);
+  m.reset();
 }
 
 const x = MyModule.product(3, 4);
