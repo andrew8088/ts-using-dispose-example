@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2020",
+    "target": "es2022",
     "moduleResolution": "node",
     "sourceMap": true,
     "allowJs": false,
@@ -14,7 +14,7 @@
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": ["es2020", "dom"],
+    "lib": ["es2022", "esnext.disposable", "dom"],
     "noErrorTruncation": true,
     "incremental": true,
     "noImplicitAny": true,
