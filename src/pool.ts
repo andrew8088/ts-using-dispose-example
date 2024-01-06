@@ -8,12 +8,18 @@ type Clearable = {
 }
 
 class Pool<T extends Clearable> {
-  #pool: Array<T> = [];
+  #pool: Array<T & Disposable> = [];
 
-  constructor(factory: (p: Pool<T>) => T, count: number) {
+  constructor(factory: () => T, count: number) {
     while (count--) {
-      const t = factory(this);
-      this.#pool.push(t);
+      const t = factory();
+      const tPrime = t as T & Disposable;
+
+      tPrime[Symbol.dispose] = () => {
+        tPrime.clear();
+        this.#pool.unshift(tPrime);
+      };
+      this.#pool.push(tPrime);
     }
   }
 
@@ -22,11 +28,7 @@ class Pool<T extends Clearable> {
 
     if (!t) throw new Error("pool empty");
 
-    t.clear();
     return t;
-  }
-  return(t: T) {
-    this.#pool.unshift(t);
   }
 }
 
@@ -55,8 +57,7 @@ const numsArr = [
 ];
 
 for (const nums of numsArr) {
-  const s = pool.get();
+  using s = pool.get();
   nums.forEach(n => s.add(n));
   console.log(s.result());
-  pool.return(s);
 }
